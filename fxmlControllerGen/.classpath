@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Oracle/JavaFX Scene Builder 1.0/bin/lib/jfxrt.jar" sourcepath="D:/arc/java/JavaFX/rt-javafx2.0-5c3b3d524f07.zip"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

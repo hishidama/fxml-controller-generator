@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<project name="fxml-controller-gen" default="jar" basedir="..">
+	<target name="jar">
+		<jar basedir="classes" jarfile="release/fxml-controller-generator.jar">
+			<exclude name="**/*.bak" />
+			<manifest>
+				<attribute name="Main-Class" value="jp.hishidama.javafx.fxml.FxmlControllerGenerator" />
+			</manifest>
+		</jar>
+	</target>
+</project>
