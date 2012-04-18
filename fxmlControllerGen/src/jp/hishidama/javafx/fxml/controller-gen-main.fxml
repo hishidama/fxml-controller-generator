@@ -6,20 +6,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="jp.hishidama.javafx.fxml.GenMainController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" prefHeight="355.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="jp.hishidama.javafx.fxml.GenMainController">
   <children>
     <Label id="label1" layoutX="31.0" layoutY="28.0" text="generate controller-java-source from fxml-file" />
     <Label id="label2" layoutX="31.0" layoutY="77.0" text="fxml file" />
-    <TextField id="textField1" fx:id="fxmlFile" layoutY="74.0" onDragDropped="#handleDrop" prefHeight="20.0" prefWidth="413.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="60.0" />
+    <TextField id="textField1" fx:id="fxmlFile" layoutY="74.0" prefHeight="20.0" prefWidth="337.0001220703125" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="60.0" />
     <Button id="button1" layoutY="74.0" onAction="#handleFxmlFile" text="..." AnchorPane.rightAnchor="14.0">
       <tooltip>
         <Tooltip id="tooltip1" text="specify fxml-file path" />
       </tooltip>
     </Button>
     <Label id="label2" layoutX="31.0" layoutY="109.0" text="fxml encoding" />
-    <TextField id="textField1" fx:id="fxmlEncoding" layoutY="106.0" prefHeight="20.0" prefWidth="413.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="60.0" />
+    <TextField id="textField1" fx:id="fxmlEncoding" layoutY="106.0" prefHeight="20.0" prefWidth="337.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="60.0" />
     <Label id="label2" layoutX="31.0" layoutY="154.0" text="controller write directory" />
-    <TextField id="textField1" fx:id="controllerDir" layoutY="151.0" prefHeight="20.0" prefWidth="337.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="60.0" />
+    <TextField id="textField1" fx:id="controllerDir" layoutY="151.0" onDragDropped="#handleControllerDirDropped" onDragOver="#handleControllerDirOver" prefHeight="20.0" prefWidth="337.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="61.0" />
     <Button id="button1" layoutY="152.0" onAction="#handleControllerDir" text="..." AnchorPane.rightAnchor="14.0">
       <tooltip>
         <Tooltip id="tooltip2" text="specify directory to write controller-java-source-file" />

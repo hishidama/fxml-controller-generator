@@ -3,12 +3,16 @@ package jp.hishidama.javafx.fxml
 import java.io._
 import java.net.URL
 import java.util.ResourceBundle
-import javafx.scene.input.DragEvent
+
 import javafx.event.ActionEvent
+import javafx.fxml.Initializable
+import javafx.scene.input.DragEvent
+import javafx.scene.input.TransferMode
 import javafx.stage.FileChooser
 import javafx.stage.FileChooser.ExtensionFilter
 import javafx.stage.DirectoryChooser
-import javafx.fxml.Initializable
+
+import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.xml.factory.XMLLoader
 import scala.xml.Elem
@@ -26,10 +30,6 @@ class GenMainController extends SuperGenMainController with Initializable {
     FxmlCtrlGenProperties.save(this)
   }
 
-  override def handleDrop(event: DragEvent) {
-    println(event)
-  }
-
   lazy val ffc = {
     val fc = new FileChooser
     fc.setTitle("fxmlƒtƒ@ƒCƒ‹")
@@ -42,11 +42,42 @@ class GenMainController extends SuperGenMainController with Initializable {
     if (d.exists) ffc.setInitialDirectory(d)
     val f = ffc.showOpenDialog(null)
     if (f != null) {
-      fxmlFile.setText(f.getCanonicalPath)
-      if (controllerDir.getText().isEmpty) {
-        controllerDir.setText(f.getParent)
+      setFxmlFile(f)
+    }
+  }
+
+  protected def setFxmlFile(f: File) {
+    fxmlFile.setText(f.getCanonicalPath)
+    if (controllerDir.getText().isEmpty) {
+      controllerDir.setText(f.getParent)
+    }
+  }
+
+  override def handleDragOver(event: DragEvent) {
+    val db = event.getDragboard
+    if (db.hasFiles) {
+      val fs = db.getFiles.asScala
+      if (fs.exists(_.isFile)) {
+        event.acceptTransferModes(TransferMode.COPY)
       }
     }
+    event.consume()
+  }
+
+  override def handleDragDropped(event: DragEvent) {
+    val db = event.getDragboard
+    val success = if (db.hasFiles) {
+      val fs = db.getFiles.asScala
+      val f = fs.find(_.isFile)
+      f match {
+        case Some(f) =>
+          setFxmlFile(f)
+          true
+        case _ => false
+      }
+    } else false
+    event.setDropCompleted(success)
+    event.consume()
   }
 
   lazy val dfc = {
@@ -60,8 +91,32 @@ class GenMainController extends SuperGenMainController with Initializable {
     if (d.exists) dfc.setInitialDirectory(d)
     val f = dfc.showDialog(null)
     if (f != null) {
-      controllerDir.setText(f.getCanonicalPath)
+      setControllerDir(f)
     }
+  }
+
+  override def handleControllerDirOver(event: DragEvent) {
+    val db = event.getDragboard
+    if (db.hasFiles) {
+      event.acceptTransferModes(TransferMode.COPY)
+    }
+    event.consume()
+  }
+
+  override def handleControllerDirDropped(event: DragEvent) {
+    val db = event.getDragboard
+    val success = if (db.hasFiles) {
+      val fs = db.getFiles.asScala
+      val f = fs.head
+      setControllerDir(f)
+      true
+    } else false
+    event.setDropCompleted(success)
+    event.consume()
+  }
+
+  protected def setControllerDir(f: File) {
+    controllerDir.setText(f.getCanonicalPath)
   }
 
   override def handleGenerate(event: ActionEvent) {

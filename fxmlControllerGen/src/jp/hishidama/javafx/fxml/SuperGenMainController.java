@@ -23,9 +23,15 @@ public class SuperGenMainController {
 
 	public TextField messageLabel;
 
-	public void handleDrop(javafx.scene.input.DragEvent event) {}
+	public void handleDragDropped(javafx.scene.input.DragEvent event) {}
+
+	public void handleDragOver(javafx.scene.input.DragEvent event) {}
 
 	public void handleFxmlFile(javafx.event.ActionEvent event) {}
+
+	public void handleControllerDirDropped(javafx.scene.input.DragEvent event) {}
+
+	public void handleControllerDirOver(javafx.scene.input.DragEvent event) {}
 
 	public void handleControllerDir(javafx.event.ActionEvent event) {}
 
