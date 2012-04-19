@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 
 @SuppressWarnings("unused")
-public class SuperGenMainController {
+public class SuperGenMainController implements javafx.fxml.Initializable {
 
 	public TextField fxmlFile;
 
@@ -22,6 +22,8 @@ public class SuperGenMainController {
 	public TextField controllerEncoding;
 
 	public TextField messageLabel;
+
+	@Override public void initialize(java.net.URL location,  java.util.ResourceBundle resources) {}
 
 	public void handleDragDropped(javafx.scene.input.DragEvent event) {}
 

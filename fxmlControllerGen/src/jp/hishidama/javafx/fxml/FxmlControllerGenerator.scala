@@ -58,8 +58,9 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
 
     //ƒNƒ‰ƒX
     w.write("@SuppressWarnings(\"unused\")\n")
-    w.write("public class " + className + " {\n")
+    w.write("public class " + className + " implements javafx.fxml.Initializable {\n")
     writeJavaFields(w, root)
+    writeJavaInitialize(w)
     writeJavaHandlers(w, root, scala.collection.mutable.Set.empty)
     w.write("}\n")
   }
@@ -72,6 +73,10 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
     }
 
     elem.child.foreach { writeJavaFields(w, _) }
+  }
+
+  def writeJavaInitialize(w: Writer): Unit = {
+    w.write("\n\t@Override public void initialize(java.net.URL location,  java.util.ResourceBundle resources) {}\n")
   }
 
   def writeJavaHandlers(w: Writer, elem: Node, set: scala.collection.mutable.Set[String]): Unit = {

@@ -5,7 +5,6 @@ import java.net.URL
 import java.util.ResourceBundle
 
 import javafx.event.ActionEvent
-import javafx.fxml.Initializable
 import javafx.scene.input.DragEvent
 import javafx.scene.input.TransferMode
 import javafx.stage.FileChooser
@@ -18,7 +17,7 @@ import scala.xml.factory.XMLLoader
 import scala.xml.Elem
 import scala.xml.ProcInstr
 
-class GenMainController extends SuperGenMainController with Initializable {
+class GenMainController extends SuperGenMainController {
 
   override def initialize(url: URL, resourcebundle: ResourceBundle): Unit = {
     try {
