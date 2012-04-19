@@ -76,7 +76,7 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
   }
 
   def writeJavaInitialize(w: Writer): Unit = {
-    w.write("\n\t@Override public void initialize(java.net.URL location,  java.util.ResourceBundle resources) {}\n")
+    w.write("\n\t@Override public void initialize(java.net.URL location, java.util.ResourceBundle resources) {}\n")
   }
 
   def writeJavaHandlers(w: Writer, elem: Node, set: scala.collection.mutable.Set[String]): Unit = {
