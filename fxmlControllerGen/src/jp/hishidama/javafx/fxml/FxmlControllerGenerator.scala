@@ -113,7 +113,7 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
 
     var map = Map.empty[String, Class[_]]
     list.foreach { c =>
-      c.getFields.
+      c.getDeclaredFields.
         collect { case f if f.getType == classOf[EventType[_]] => f.get(null).asInstanceOf[EventType[_]] }.
         foreach { n =>
           map += (("on" + n.getName.replaceAll("[\\_\\-]", "")).toLowerCase -> c)
