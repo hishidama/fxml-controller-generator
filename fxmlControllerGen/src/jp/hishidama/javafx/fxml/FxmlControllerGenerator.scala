@@ -57,7 +57,7 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
     w.write("\n")
 
     //ƒNƒ‰ƒX
-    w.write("@SuppressWarnings(\"unused\")\n")
+    w.write("@SuppressWarnings({ \"unused\", \"rawtypes\" })\n")
     w.write("public class " + className + " implements javafx.fxml.Initializable {\n")
     writeJavaFields(w, root)
     writeJavaInitialize(w)
