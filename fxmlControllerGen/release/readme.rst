@@ -42,6 +42,7 @@ fxml-controller-generatorを実行すると、ウィンドウが開きます。
 fxml file
   | 読み込むfxmlファイルを指定します。
   | 指定した際に「controller write directory」項目が空だと、そちらにもfxmlファイルと同じディレクトリーが入力されます。
+  | なお、ファイルをドラッグしてウィンドウへドロップすると、「fxml file」項目への入力になります。
 fxml encoding
   | fxmlファイルのエンコーディングを指定します。普通はUTF-8なので何も入力しないで構いません。
   | （WindowsのScene Builder 1.0のバグで、日本語を使った場合にShift_JISでfxmlファイルが生成されます。それを読み込む為にMS932を指定します）
