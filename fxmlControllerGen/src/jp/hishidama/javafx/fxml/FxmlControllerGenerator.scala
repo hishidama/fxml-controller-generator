@@ -44,6 +44,27 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
     }
   }
 
+  private def classForName(name: String) = try { Class.forName(name) } catch { case _ => null }
+  private lazy val (simpleImports, demandImports) = {
+    val sm = scala.collection.mutable.Map.empty[String, Class[_]]
+    var ds = Seq.empty[String]
+    imports.foreach { i =>
+      if (i.endsWith("*")) {
+        ds :+= i.substring(0, i.length() - 1)
+      } else {
+        sm.put(i.split("\\.").last, classForName(i))
+      }
+    }
+    (sm, ds)
+  }
+  def toClass(name: String): Class[_] = {
+    val c = classForName(name)
+    if (c ne null) c
+    else simpleImports.getOrElseUpdate(name,
+      demandImports.map { i => classForName(i + name)
+      }.find(_ ne null).orNull)
+  }
+
   def writeJava(w: Writer, className: String): Unit = {
     //パッケージ宣言
     if (packName.nonEmpty) {
@@ -57,7 +78,7 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
     w.write("\n")
 
     //クラス
-    w.write("@SuppressWarnings({ \"unused\", \"rawtypes\" })\n")
+    w.write("@SuppressWarnings(\"unused\")\n")
     w.write("public class " + className + " implements javafx.fxml.Initializable {\n")
     writeJavaFields(w, root)
     writeJavaInitialize(w)
@@ -69,6 +90,10 @@ class FxmlControllerGenerator(root: Elem, imports: Seq[String]) {
     val amap = elem.attributes.asAttrMap
     amap.get("fx:id").foreach { id =>
       val label = elem.label
+      val c = toClass(label)
+      if ((c ne null) && c.getTypeParameters.nonEmpty) {
+        w.write("\n\t@SuppressWarnings(\"rawtypes\")")
+      }
       w.write("\n\tpublic " + label + " " + id + ";\n")
     }
 
